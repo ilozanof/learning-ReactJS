@@ -1,0 +1,33 @@
+.clock {
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 50px;
+    width:50%;
+    font-weight: bold;
+    color: rgb(100, 0, 0);
+    text-align: center;
+    border-radius: 20px;
+    background-color: rgb(255, 150, 50);
+}
+
+.clock .header {
+    font-size: 20px;
+    padding:10px;
+    border-bottom: 1px solid rgb(100, 0, 0);
+}
+
+.clock .header .formatSelect {
+    float: right;
+    margin-right: 5px;
+}
+.clock .header .calendarLink {
+    float: right;
+    margin-right:10px;
+    margin-top: 5px;
+}
+
+.clock .content {
+    font-size: 30px;
+    padding:30px;
+    
+}

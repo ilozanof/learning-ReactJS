@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Hello world</title>
+		<!-- Script tags including React -->
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.3.1/react.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.3.1/react-dom.min.js"></script>
+		<script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+	</head>
+	<body>
+		<div id="app1"></div>
+		<div id="app2"></div>
+		<script type="text/babel">
+			// We define and render the first Component, using an JSX epxression:
+			var app1 = <h1>Hello world. I am using a JSX expression</h1>;
+			var mountComponent = document.querySelector('#app1');
+			ReactDOM.render(app1, mountComponent);
+
+			// We define and render the second component, delcaring a whole React component:
+			class App2 extends React.Component {
+			render() {
+			return <h1>Hello World. I am using a React component Declaration using ES06 Sysntax.</h1>
+		    }
+		  }
+		  mountComponent = document.querySelector('#app2');
+			ReactDOM.render(<App2/>, mountComponent);
+		</script>
+	</body>
+</html>
