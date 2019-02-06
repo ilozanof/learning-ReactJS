@@ -12,7 +12,7 @@ So, the most efficeinte way to work with the content is this:
 
 2. Go to the subproject you wanna work with, and type the following in the console: `npm install`. This will install all the dependencies. These dependencies will be stored in some folders (like _/node_modules_ whihch are _excluded_ from the git _pull/push_ operations.)
 
-3. Type 'npm start' in the conslose. that's it!
+3. Type `npm start` in the conslose. that's it!
 
 ---
 
