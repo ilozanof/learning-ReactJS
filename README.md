@@ -1,6 +1,21 @@
 # learning-ReactJS
 This project contains several sub-projects showing some ReactJS_ capabilities, from the basic ones to more advanced, following some tutorial on the Inernet (links will be included when possible).
 
+---
+**IMPORTANT:**
+
+**The "learning-ReactJS" itself is not a project, is only a folder that groups all the sub-projects together. Since the number of this small projects might grow over time, I've decided to use this way instad of createing an independent repository for each one of them.**
+
+So, the most efficeinte way to work with the content is this:
+
+1. Clone the whole repository (the "learning-ReactJS" folder). This will download all the subfolders containing the inidividual subprojects. 
+
+2. Go to the subproject you wanna work with, and type the following in the console: `npm install`. This will install all the dependencies. These dependencies will be stored in some folders (like _/node_modules_ whihch are _excluded_ from the git _pull/push_ operations.)
+
+3. Type 'npm start' in the conslose. that's it!
+
+---
+
 A good tutorial to get started with _RactJS_ is [30 Days of React](https://www.fullstackreact.com/30-days-of-react/day-1/), where you can learn from the basis, up to developing a full working _ReactJS_ application.
 
 > The source code for all the examples in the *30 Days of React* tutorial are available in GitHub [here](https://github.com/fullstackreact/30-days-of-react)
