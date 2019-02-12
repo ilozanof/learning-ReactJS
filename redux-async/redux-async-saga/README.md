@@ -1,68 +1,47 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# redux-async-saga
 
-## Available Scripts
+This is an example of how to make asynchornous calls in a _React+redux+saga_ application, and changing the state at the same time. 
 
-In the project directory, you can run:
+> This app is inspired in the one here: [Understanding redux-saga: From action creator to sagas](https://blog.logrocket.com/understanding-redux-saga-from-action-creators-to-sagas-2587298b5e71)
 
-### `npm start`
+In this scenario, unlike the _redux-async-simple_ project, the business logic is _NOT_ defined in methods inside the _Component_, but outside (but in the same file). 
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+The integration of _Saga_ seems to consists of the following points:
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+* We define _Saga_ as a middleware
+* We implement the business logic as methods _outside_ the Components (I guess it's a good idea to leave the components only for the rendering part). The methods that are supposed to run asynchronously are implemented by generators. For each Async method we follow this pattern:
+  * We assume that our function will be triggered by a redux action. 
+  * We define a generator function that look for new incoming redux actions
+  * every time we get an action, we launch a helper method, which is _another_ generator function that does the real work.
 
-### `npm test`
 
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+for example, here:
 
-### `npm run build`
+```
+/ Sagas definition...
 
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
+// This function is executed by the Saga middleware, and it's running in the background
+// Every time it intercepts a Redux Action of type 'FETCHED_DOG', it delegates the
+// execution to a helper method, who does the job ("fetchDogAsync" in this case)
+function* watchFetchDog() {
+    yield takeEvery('FETCHED_DOG', fetchDogAsync);
+}
 
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
+// This is a business logic function, that runs asynchronously.
+// Its implemented as a Generator Function.
+// The Saga framework is responsible for accessing the values of this
+// generator, as they are available.
+function* fetchDogAsync() {
+    try {
+        yield put(requestDogAction());
+        const data = yield call(() => {
+            return fetch('https://dog.ceo/api/breeds/image/random')
+                .then(res => res.json())
+        });
+        yield put(requestDogSuccessAction(data));
+    } catch (error) {
+        yield put(requestDogErrorAction());
+    }
+}
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+```
