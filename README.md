@@ -124,3 +124,9 @@ This Project imple,nets some _React_ features:
 > 
 > More info about the _React Hooks_ here: [An introduction to HOOKS in React](https://www.fullstackreact.com/articles/an-introduction-to-hooks-in-react/)
 
+## hello-redux
+This project implements a list of Feed-news, and a method to archive each list, so its not visible anymore. 
+It uses _React_ + _REDUX_, as a middleware for _state management_.
+
+> This project is based on the (great) tutorial stored here: [React Redux Tutorial for Beginners[2018]](https://www.robinwieruch.de/react-redux-tutorial/)
+
